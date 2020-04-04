@@ -1,0 +1,13 @@
+---
+apiVersion: tekton.dev/v1alpha1
+kind: Condition
+metadata:
+  name: terraform-validate
+spec:
+  resources:
+    - name: source-repo
+      type: git
+  check:
+    image: stobias123/terraform
+    command: ["terraform"]
+    args: ['validate', "$(resources.source-repo.path)/..."]
